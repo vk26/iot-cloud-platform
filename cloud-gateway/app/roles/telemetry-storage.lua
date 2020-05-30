@@ -58,7 +58,7 @@ end
 
 local function get_telemetry_by_device(device_id)
     checks('string')
-    local tupels = box.space.telemetry:select{device_id = device_id}
+    local tupels = box.space.telemetry.index.device_id:select{device_id}
     local telemetry = {}
     for i = 1, #tupels do
         local values = telemetry[tupels[i][5]] or {}
@@ -77,6 +77,11 @@ local function get_telemetry_by_device(device_id)
     return collection
 end
 
+local function get_devices()
+    local tupels = box.space.telemetry.index.device_id:select()
+    return tupels
+end
+
 local function init(opts)
     if opts.is_master then
         init_space()
@@ -87,6 +92,7 @@ local function init(opts)
 
     rawset(_G, 'telemetry_add', telemetry_add)
     rawset(_G, 'get_telemetry_by_device', get_telemetry_by_device)
+    rawset(_G, 'get_devices', get_devices)
 
     return true
 end
@@ -97,6 +103,7 @@ return {
     utils = {
         telemetry_add = telemetry_add,
         get_telemetry_by_device = get_telemetry_by_device,
+        get_devices = get_devices,
     },
     dependencies = {
         'cartridge.roles.vshard-storage'

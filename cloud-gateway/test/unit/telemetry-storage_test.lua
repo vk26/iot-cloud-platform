@@ -44,6 +44,15 @@ local telemetry4 = {
     telemetry_value = 124,
     timestamp = 1590634148
 }
+local telemetry5 = {
+    id = '5',
+    device_id = 'dev02',
+    device_name = 'Device_02',
+    bucket_id = 1,
+    telemetry_key = 'pressure',
+    telemetry_value = 100,
+    timestamp = 1590634148
+}
 
 
 g.test_sample = function()

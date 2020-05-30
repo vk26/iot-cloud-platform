@@ -20,15 +20,16 @@ local function internal_error_response(req, error)
 end
 
 local function get_grafana_metrics_keys(req)
-    local data = {"upper_25","upper_50","upper_75","upper_90","upper_95"}
+    local data = {'dev01', 'dev02', 'dev03', 'dev04'}
 
     return json_response(req, data, 200)
 end
 
 local function get_grafana_metrics_data(req)
-    local json=require('json')
+    local params = req:json()
 
-    local device_id = 'dev01' -- TODO: 
+    local device_id = params.targets[1].target
+    log.warn(device_id)
     local router = cartridge.service_get('vshard-router').get()
     local bucket_id = router:bucket_id(device_id)
 

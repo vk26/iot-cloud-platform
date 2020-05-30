@@ -32,7 +32,16 @@ local telemetry3 = {
     telemetry_value = 124,
     timestamp = 1590634148
 }
-local data = {
+local telemetry4 = {
+    id = '4',
+    device_id = 'dev02',
+    device_name = 'Device_02',
+    bucket_id = 1,
+    telemetry_key = 'pressure',
+    telemetry_value = 100,
+    timestamp = 1590634148
+}
+local metrics_data = {
     {
         target = "pressure",
         datapoints =  {
@@ -47,9 +56,10 @@ local data = {
         }
     },
 }
+local metrics_keys = {'dev01', 'dev02'}
 
 g.test_on_get_grafana_telemetry_data_ok = function ()
-    local request_data = {targets = {{target= '1'}}}
+    local request_data = {targets = {{target= 'dev01'}}}
     -- box.space.telemetry:insert(box.space.telemetry:frommap(telemetry1))
     -- box.space.telemetry:insert(box.space.telemetry:frommap(telemetry2))
     -- box.space.telemetry:insert(box.space.telemetry:frommap(telemetry3))
@@ -67,7 +77,28 @@ g.test_on_get_grafana_telemetry_data_ok = function ()
     })
 
     helper.assert_http_json_request('post', '/grafana/query', request_data, {
-        body = data, 
+        body = metrics_data, 
+        status = 200
+    })
+end
+
+g.test_on_get_grafana_metrics_keys_ok = function ()
+    local request_data = {targets = {{target= '1'}}}
+    helper.assert_http_json_request('post', '/api/telemetry', telemetry1, {
+        body = {info = "Successfully created"}, 
+        status=201
+    })
+    helper.assert_http_json_request('post', '/api/telemetry', telemetry2, {
+        body = {info = "Successfully created"}, 
+        status=201
+    })
+    helper.assert_http_json_request('post', '/api/telemetry', telemetry3, {
+        body = {info = "Successfully created"}, 
+        status=201
+    })
+
+    helper.assert_http_json_request('post', '/grafana/search', request_data, {
+        body = metrics_keys, 
         status = 200
     })
 end
