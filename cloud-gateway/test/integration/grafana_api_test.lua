@@ -68,6 +68,6 @@ g.test_on_get_grafana_telemetry_data_ok = function ()
 
     helper.assert_http_json_request('post', '/grafana/query', request_data, {
         body = data, 
-        status = 201
+        status = 200
     })
 end
