@@ -34,6 +34,7 @@ local ok, err = cartridge.cfg({
         'cartridge.roles.vshard-router',
         'app.roles.telemetry-storage',
         'app.roles.api',
+        'app.roles.grafana-api',
     },
     cluster_cookie = 'cloud-gateway-cluster-cookie',
 })

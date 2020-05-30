@@ -11,7 +11,7 @@ local test_telemetry = {
     device_name = 'Device_01',
     bucket_id = 1,
     telemetry_key = 'temperature',
-    telemetry_value = 86
+    telemetry_value = 186
 }
 
 g.test_on_post_ok = function ()

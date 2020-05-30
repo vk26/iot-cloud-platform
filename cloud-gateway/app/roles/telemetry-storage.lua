@@ -55,8 +55,8 @@ local function telemetry_add(telemetry)
     return {ok = true, error = nil}
 end
 
-local function get_telemetrys_by_device(device_id)
-    checks('number')
+local function get_telemetry_by_device(device_id)
+    checks('string')
     local tupels = box.space.telemetry:select{device_id = device_id}
     local telemetry = {}
     for i = 1, #tupels do
@@ -78,11 +78,11 @@ local function init(opts)
         init_space()
 
         box.schema.func.create('telemetry_add', {if_not_exists = true})
-        box.schema.func.create('get_telemetrys_by_device', {if_not_exists = true})
+        box.schema.func.create('get_telemetry_by_device', {if_not_exists = true})
     end
 
     rawset(_G, 'telemetry_add', telemetry_add)
-    rawset(_G, 'get_telemetrys_by_device', get_telemetrys_by_device)
+    rawset(_G, 'get_telemetry_by_device', get_telemetry_by_device)
 
     return true
 end
@@ -92,7 +92,7 @@ return {
     init = init,
     utils = {
         telemetry_add = telemetry_add,
-        get_telemetrys_by_device = get_telemetrys_by_device,
+        get_telemetry_by_device = get_telemetry_by_device,
     },
     dependencies = {
         'cartridge.roles.vshard-storage'
