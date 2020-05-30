@@ -33,6 +33,7 @@ local ok, err = cartridge.cfg({
         'cartridge.roles.vshard-storage',
         'cartridge.roles.vshard-router',
         'app.roles.telemetry-storage',
+        'app.roles.api',
     },
     cluster_cookie = 'cloud-gateway-cluster-cookie',
 })
