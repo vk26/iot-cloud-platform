@@ -1,5 +1,6 @@
 local checks = require('checks')
 local errors = require('errors')
+local log = require('log')
 
 local function tuple_to_table(format, tuple)
     local map = {}
@@ -67,6 +68,9 @@ local function get_telemetry_by_device(device_id)
 
     local collection = {}
     for k, datapoints in pairs(telemetry) do 
+        table.sort(datapoints, function(a, b)
+            return a[2] < b[2]
+        end)
         table.insert(collection, {target = k, datapoints = datapoints}) 
     end
 

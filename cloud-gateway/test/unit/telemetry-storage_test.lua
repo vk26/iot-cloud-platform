@@ -15,7 +15,7 @@ local telemetry1 = {
     bucket_id = 1,
     telemetry_key = 'temperature',
     telemetry_value = 86,
-    timestamp = 1590634148
+    timestamp = 1590631001
 }
 local telemetry2 = {
     id = '2',
@@ -24,10 +24,19 @@ local telemetry2 = {
     bucket_id = 1,
     telemetry_key = 'temperature',
     telemetry_value = 65,
-    timestamp = 1590634148
+    timestamp = 1590632002
 }
 local telemetry3 = {
     id = '3',
+    device_id = 'dev01',
+    device_name = 'Device_01',
+    bucket_id = 1,
+    telemetry_key = 'temperature',
+    telemetry_value = 90,
+    timestamp = 1590633003
+}
+local telemetry4 = {
+    id = '4',
     device_id = 'dev01',
     device_name = 'Device_01',
     bucket_id = 1,
@@ -48,24 +57,26 @@ g.test_telemetry_add_ok = function()
     t.assert_equals(from_space, box.space.telemetry:frommap(to_insert))
 end
 
-g.test_get_telemetrys_by_device = function()
-    box.space.telemetry:insert(box.space.telemetry:frommap(telemetry1))
+g.test_get_telemetry_by_device = function()
     box.space.telemetry:insert(box.space.telemetry:frommap(telemetry2))
+    box.space.telemetry:insert(box.space.telemetry:frommap(telemetry1))
     box.space.telemetry:insert(box.space.telemetry:frommap(telemetry3))
-    t.assert_equals(utils.get_telemetrys_by_device(1), {
-        {
-            target = "temperature",
-            datapoints  = {
-                {86,1590634148000},
-                {65,1590634148000}
-            }
-        },
+    box.space.telemetry:insert(box.space.telemetry:frommap(telemetry4))
+    t.assert_equals(utils.get_telemetry_by_device('dev01'), {
         {
             target = "pressure",
             datapoints =  {
                 {124,1590634148000},
             }
-        }
+        },
+        {
+            target = "temperature",
+            datapoints  = {
+                {86,1590631001000},
+                {65,1590632002000},
+                {90,1590633003000},
+            }
+        },
     })
 end
 

@@ -5,6 +5,13 @@ curl -X POST -v -H "Content-Type: application/json" -d '{
   "telemetry_value": 86
 }' http://localhost:8081/api/telemetry
 
+curl -X POST -v -H "Content-Type: application/json" -d '{
+  "device_id": "dev01",
+  "device_name": "Device_01",
+  "telemetry_key": "pressure",
+  "telemetry_value": 55
+}' http://localhost:8081/api/telemetry
+
 
 curl -X POST -v -H "Content-Type: application/json" -d '{
   "device_id": "dev01"
