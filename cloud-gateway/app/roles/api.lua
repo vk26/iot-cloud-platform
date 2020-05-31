@@ -49,20 +49,7 @@ local function device_unauthorized(req)
     return resp
 end
 
-local function produce_telemetry_to_kafka(telemetry)
-    local message = json.encode(telemetry)
-    local err = producer:produce_async({
-        topic = "telemetry_stream",
-        value = message
-    })
-    if err ~= nil then
-        lor.error(err)
-    end
-end
-
-local function http_telemetry_add(req)
-    local telemetry = req:json()
-
+local function save_telemetry_to_storage(telemetry)
     local router = cartridge.service_get('vshard-router').get()
     local bucket_id = router:bucket_id(telemetry.device_id)
     telemetry.id = uuid.str()
@@ -79,6 +66,25 @@ local function http_telemetry_add(req)
         'telemetry_add',
         {telemetry}
     )
+
+    return error
+end
+
+local function produce_telemetry_to_kafka(telemetry)
+    local message = json.encode(telemetry)
+    local err = producer:produce_async({
+        topic = "telemetry_stream",
+        value = message
+    })
+    if err ~= nil then
+        lor.error(err)
+    end
+end
+
+local function http_telemetry_process(req)
+    local telemetry = req:json()
+
+    local resp, error = save_telemetry_to_storage(telemetry)
 
     if error then
         return internal_error_response(req, error)
@@ -120,7 +126,7 @@ local function init(opts) -- luacheck: no unused args
 
     httpd:route(
         { path = '/api/telemetry', method = 'POST', public = true },
-        http_telemetry_add
+        http_telemetry_process
     )
 
     return true
