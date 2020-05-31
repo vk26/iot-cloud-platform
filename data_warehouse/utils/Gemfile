@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+
+gem 'rake'
+gem 'delivery_boy', '~> 1.0.1'
+gem 'activesupport'
+
+gem 'pry-byebug', '~> 3.9.0'
+gem 'faker'
