@@ -23,9 +23,6 @@ local producer, err = tnt_kafka.Producer.create({
     options = {}, -- options for librdkafka
     error_callback = error_callback, -- optional callback for errors
     log_callback = log_callback, -- optional callback for logs and debug messages
-    -- default_topic_options = {
-    --     ["partitioner"] = "murmur2_random",
-    -- }, 
 })
 
 local function json_response(req, json, status)
@@ -55,7 +52,7 @@ local function save_telemetry_to_storage(telemetry)
     telemetry.id = uuid.str()
     telemetry.bucket_id = bucket_id
     if not telemetry.timestamp then
-        telemetry.timestamp = os.time(os.date("!*t"))
+        telemetry.timestamp = os.time()
     end
 
     local resp, error = err_vshard_router:pcall(
@@ -101,7 +98,7 @@ local function http_telemetry_process(req)
         telemetry_value_int = telemetry.telemetry_value,
         treshold_exceeded = false,
         region = "Central",
-        city = "Saint-Petersburg",
+        city = "Irkutsk",
         department = "Department_01",
         timestamp = telemetry.timestamp
     })
