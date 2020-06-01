@@ -21,4 +21,6 @@ cloud-gateway/node_modules
 cloud-gateway/tmp/
 cloud-gateway/!/tmp/.keep
 
-
+load_testing/yandex-tank/overload_token.txt
+load_testing/yandex-tank/logs
+load_testing/yandex-tank/tank_errors.log

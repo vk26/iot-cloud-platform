@@ -1,0 +1,15 @@
+253
+yyy marker
+POST /api/telemetry HTTP/1.1
+Host: localhost:8081
+User-Agent: curl/7.66.0
+Accept: */*
+Content-Type: application/json
+Content-Length: 115
+
+{
+  "device_id": "dev01",
+  "device_name": "Device_01",
+  "telemetry_key": "temperature",
+  "telemetry_value": 86
+}

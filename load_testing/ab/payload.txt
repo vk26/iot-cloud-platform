@@ -1,0 +1,6 @@
+{
+  "device_id": "dev01",
+  "device_name": "Device_01",
+  "telemetry_key": "temperature",
+  "telemetry_value": 86
+}

@@ -1,0 +1,18 @@
+overload:
+  enabled: true
+  package: yandextank.plugins.DataUploader
+  token_file: "overload_token.txt"
+  job_name: iot-cloud-platform
+  job_dsc: Testing search users with indexes DB and without
+  
+phantom:
+  address: 127.0.0.1:8081
+  ammo_type: phantom
+  ammofile: ammo.txt
+  load_profile:
+    load_type: rps # schedule load by defining requests per second
+    schedule: line(1, 10, 10s) # starting from 10rps growing linearly to 1000rps during 30 seconds
+console:
+  enabled: true # enable console output
+telegraf:
+  enabled: false # let's disable telegraf monitoring for the first time
