@@ -12,7 +12,7 @@ phantom:
   writelog: proto_error
   load_profile:
     load_type: rps # schedule load by defining requests per second
-    schedule: line(4, 4, 30s) # starting from 10rps growing linearly to 1000rps during 30 seconds
+    schedule: line(4, 4, 60s) # starting from 10rps growing linearly to 1000rps during 30 seconds
 console:
   enabled: true # enable console output
 telegraf:

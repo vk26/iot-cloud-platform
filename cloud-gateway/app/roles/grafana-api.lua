@@ -29,7 +29,6 @@ local function get_grafana_metrics_data(req)
     local params = req:json()
 
     local device_id = params.targets[1].target
-    log.warn(device_id)
     local router = cartridge.service_get('vshard-router').get()
     local bucket_id = router:bucket_id(device_id)
 
@@ -41,8 +40,6 @@ local function get_grafana_metrics_data(req)
         'get_telemetry_by_device',
         {device_id}
     )
-    log.warn(error)
-    log.warn(data)
     return json_response(req, data, 200)
 end
 

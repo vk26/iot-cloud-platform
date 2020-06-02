@@ -22,7 +22,7 @@ local producer, err = tnt_kafka.Producer.create({
     brokers = "localhost:9092", -- TODO: use ENV
     options = {}, -- options for librdkafka
     error_callback = error_callback, -- optional callback for errors
-    log_callback = log_callback, -- optional callback for logs and debug messages
+    -- log_callback = log_callback, -- optional callback for logs and debug messages
 })
 
 local function json_response(req, json, status)
