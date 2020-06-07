@@ -49,7 +49,7 @@ def main():
             "User-Agent: tank\r\n" + \
             "Accept: */*\r\n" + \
             "Content-Type: application/json\r\n" + \
-            "Connection: keep-alive"
+            "Connection: close"
 
         sys.stdout.write(make_ammo(method, url, headers, case, body))
 

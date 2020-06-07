@@ -88,6 +88,10 @@ local function init(opts)
 
         box.schema.func.create('telemetry_add', {if_not_exists = true})
         box.schema.func.create('get_telemetry_by_device', {if_not_exists = true})
+
+        box.cfg{
+            readahead = 10 * 1024 * 1024 
+        }
     end
 
     rawset(_G, 'telemetry_add', telemetry_add)
