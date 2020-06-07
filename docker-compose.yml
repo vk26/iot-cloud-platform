@@ -1,6 +1,14 @@
 version: "3.6"
 
 services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf 
+    network_mode: host
+
   clickhouse-server:
     image: yandex/clickhouse-server
     volumes:

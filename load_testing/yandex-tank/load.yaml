@@ -6,7 +6,7 @@ overload:
   job_dsc: Testing sending telemetry requests
   
 phantom:
-  address: 127.0.0.1:8081
+  address: 127.0.0.1:80
   ammo_type: phantom
   ammofile: ammo.txt
   writelog: proto_error
