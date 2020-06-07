@@ -1,4 +1,4 @@
-cloud-gateway.router:
+cloud-gateway.router1:
   workdir: ./tmp/db_dev/3301
   advertise_uri: localhost:3301
   http_port: 8081
@@ -8,20 +8,35 @@ cloud-gateway.s1-master:
   advertise_uri: localhost:3302
   http_port: 8082
 
-cloud-gateway.s1-replica:
+cloud-gateway.s2-master:
   workdir: ./tmp/db_dev/3303
   advertise_uri: localhost:3303
   http_port: 8083
 
-cloud-gateway.s2-master:
+cloud-gateway.s3-master:
   workdir: ./tmp/db_dev/3304
   advertise_uri: localhost:3304
   http_port: 8084
 
-cloud-gateway.s2-replica:
+cloud-gateway.s4-master:
   workdir: ./tmp/db_dev/3305
   advertise_uri: localhost:3305
   http_port: 8085
+
+cloud-gateway.router2:
+  workdir: ./tmp/db_dev/3307
+  advertise_uri: localhost:3307
+  http_port: 8087   
+
+cloud-gateway.router3:
+  workdir: ./tmp/db_dev/3308
+  advertise_uri: localhost:3308
+  http_port: 8088 
+  
+cloud-gateway.router4:
+  workdir: ./tmp/db_dev/3309
+  advertise_uri: localhost:3309
+  http_port: 8089   
 
 cloud-gateway-stateboard:
   workdir: ./tmp/db_dev/3310
