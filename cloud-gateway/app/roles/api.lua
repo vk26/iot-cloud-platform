@@ -25,25 +25,12 @@ local producer, err = tnt_kafka.Producer.create({
     -- log_callback = log_callback, -- optional callback for logs and debug messages
 })
 
-local function json_response(req, json, status)
-    local resp = req:render({json = json})
-    resp.status = status
-    return resp
+local function internal_error_response(error)
+    return {status = 500, error = error}
 end
 
-local function internal_error_response(req, error)
-    local resp = json_response(req, {
-        info = "Internal error",
-        error = error
-    }, 500)
-    return resp
-end
-
-local function device_unauthorized(req)
-    local resp = json_response(req, {
-        info = "Unauthorized"
-    }, 401)
-    return resp
+local function device_unauthorized()
+    return {status = 401, info = "Unauthorized"}
 end
 
 local function save_telemetry_to_storage(telemetry)
@@ -78,13 +65,13 @@ local function produce_telemetry_to_kafka(telemetry)
     end
 end
 
-local function http_telemetry_process(req)
-    local telemetry = req:json()
+local function api(req)
+    local telemetry = json.decode(req.body)
 
     local resp, error = save_telemetry_to_storage(telemetry)
 
     if error then
-        return internal_error_response(req, error)
+        return internal_error_response(error)
     end
     -- if resp.error then
     --     return storage_error_response(req, resp.error)
@@ -103,28 +90,21 @@ local function http_telemetry_process(req)
         timestamp = telemetry.timestamp
     })
 
-    return json_response(req, {info = "Successfully created"}, 201)
+    return {status = 201, info = "Successfully created"}
 end
 
-local function init(opts) -- luacheck: no unused args
+local function init(opts)
    if opts.is_master then
         box.schema.user.grant('guest',
             'read,write',
             'universe',
             nil, { if_not_exists = true }
         )
+        box.schema.func.create('api', {if_not_exists = true})
+        box.schema.user.grant('guest', 'execute', 'function', 'api', {if_not_exists = true})
     end   
 
-    local httpd = cartridge.service_get('httpd')
-
-    if not httpd then
-        return nil, err_httpd:new("not found")
-    end
-
-    httpd:route(
-        { path = '/api/telemetry', method = 'POST', public = true },
-        http_telemetry_process
-    )
+    rawset(_G, 'api', api)
 
     return true
 end
@@ -147,8 +127,11 @@ end
 return {
     role_name = 'api',
     init = init,
+    utils = {
+        api = api,
+    },
     stop = stop,
     validate_config = validate_config,
     apply_config = apply_config,
-    -- dependencies = {'cartridge.roles.vshard-router'},
+    dependencies = {'cartridge.roles.vshard-router'},
 }
