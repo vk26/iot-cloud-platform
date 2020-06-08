@@ -90,7 +90,8 @@ local function init(opts)
         box.schema.func.create('get_telemetry_by_device', {if_not_exists = true})
 
         box.cfg{
-            readahead = 10 * 1024 * 1024 
+            readahead = 10 * 1024 * 1024,
+            net_msg_max = 768 * 3,
         }
     end
 
