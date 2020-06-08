@@ -1,4 +1,4 @@
-curl -X POST -v -H "Content-Type: application/json" -H "Connection: close" -d '{
+curl -X POST -v -H "Content-Type: application/json" -H "Connection: keep-alive" -d '{
   "device_id": "dev01",
   "telemetry_key": "temperature",
   "telemetry_value": 86

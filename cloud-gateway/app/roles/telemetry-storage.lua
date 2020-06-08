@@ -19,7 +19,6 @@ local function init_space()
             format = {
                 {'id', 'string'},
                 {'device_id', 'string'},
-                {'device_name', 'string'},
                 {'bucket_id', 'unsigned'},
                 {'telemetry_key', 'string'},
                 {'telemetry_value', 'unsigned'},

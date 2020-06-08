@@ -77,18 +77,18 @@ local function api(req)
     --     return storage_error_response(req, resp.error)
     -- end
 
-    -- produce_telemetry_to_kafka({
-    --     client_id = 1,
-    --     device_id = telemetry.device_id,
-    --     device_type = "sensor_01",
-    --     telemetry_key = telemetry.telemetry_key,
-    --     telemetry_value_int = telemetry.telemetry_value,
-    --     treshold_exceeded = false,
-    --     region = "Central",
-    --     city = "Irkutsk",
-    --     department = "Department_01",
-    --     timestamp = telemetry.timestamp
-    -- })
+    produce_telemetry_to_kafka({
+        client_id = 1,
+        device_id = telemetry.device_id,
+        device_type = "sensor_01",
+        telemetry_key = telemetry.telemetry_key,
+        telemetry_value_int = telemetry.telemetry_value,
+        treshold_exceeded = false,
+        region = "Central",
+        city = "Irkutsk",
+        department = "Department_01",
+        timestamp = telemetry.timestamp
+    })
 
     return {status = 201, info = "Successfully created"}
 end
