@@ -45,7 +45,7 @@ def main():
 
         method, url, case = method.strip(), url.strip(), case.strip()
 
-        headers = "Host: localhost:8081\r\n" + \
+        headers = "Host: 127.0.0.1:80\r\n" + \
             "User-Agent: tank\r\n" + \
             "Accept: */*\r\n" + \
             "Content-Type: application/json\r\n" + \
