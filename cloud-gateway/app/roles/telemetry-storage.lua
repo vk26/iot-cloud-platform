@@ -60,9 +60,9 @@ local function get_telemetry_by_device(device_id)
     local tupels = box.space.telemetry.index.device_id:select{device_id}
     local telemetry = {}
     for i = 1, #tupels do
-        local values = telemetry[tupels[i][5]] or {}
-        table.insert(values, {tupels[i][6], tupels[i][7]*1000} ) 
-        telemetry[tupels[i][5]] = values
+        local values = telemetry[tupels[i][4]] or {}
+        table.insert(values, {tupels[i][5], tupels[i][6]*1000} ) 
+        telemetry[tupels[i][4]] = values
     end
 
     local collection = {}

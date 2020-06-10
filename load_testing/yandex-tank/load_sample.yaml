@@ -1,0 +1,19 @@
+overload:
+  enabled: true
+  package: yandextank.plugins.DataUploader
+  token_file: "overload_token.txt"
+  job_name: iot-cloud-platform
+  job_dsc: Testing sending telemetry requests
+  
+phantom:
+  address: 127.0.0.1:80
+  ammo_type: phantom
+  ammofile: ammo2.txt
+  writelog: proto_error
+  load_profile:
+    load_type: rps # schedule load by defining requests per second
+    schedule: const(5, 480s) # starting from 10rps growing linearly to 1000rps during 30 seconds
+console:
+  enabled: true # enable console output
+telegraf:
+  enabled: false # let's disable telegraf monitoring for the first time
