@@ -7,13 +7,12 @@
 * implement user experience (real-time IoT-monitoring, BI-analytics, data-visualization)
 * cheap solution 
 
-
 # System Design
-![System deisgn](https://github.com/vk26/iot-cloud-platform/images/system_design.png)
+![System deisgn](./images/system_design.png)
 
 # Technology stack
-![Technology stack](https://github.com/vk26/iot-cloud-platform/images/techstack.png)
+![Technology stack](./images/techstack.png)
 
 # Tarantool cluster topology
-![Tarantool cluster](https://github.com/vk26/iot-cloud-platform/images/tarantool_cluster.png)
+![Tarantool cluster](./images/tarantool_cluster.png)
 
