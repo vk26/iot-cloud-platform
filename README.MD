@@ -16,3 +16,9 @@
 # Tarantool cluster topology
 ![Tarantool cluster](./images/tarantool_cluster.png)
 
+# Benchmarks
+Load Testing using yandex-tank
+Laptop CPU i7 4+4 Cores, 16 RAM, SSD
+Tarantool cluster config: 4 routers(API), 4 storages shards
+*200k RPS:*
+https://overload.yandex.net/279979
